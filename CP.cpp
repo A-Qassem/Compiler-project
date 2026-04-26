@@ -94,10 +94,6 @@ void lex() {
                     c++;
                     break;
                 } else {
-                    if (!pos(v)) {
-                        err("number must be positive", sl, sc);
-                        break;
-                    }
                     string s = "invalid character ";
                     s += ch;
                     err(s, sl, sc);
@@ -133,7 +129,11 @@ void lex() {
                     }
                     break;
                 } else {
-                    add("NUM", v, sl, sc);
+                    if (!pos(v)) {
+                        err("number must be positive", sl, sc);
+                    } else {
+                        add("NUM", v, sl, sc);
+                    }
                     break;
                 }
             } else if (st == 3) {
